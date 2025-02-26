@@ -20,6 +20,15 @@ public class MetadataWriter
     private readonly RecordTypeWriter _recordTypeWriter;
     private readonly List<ShortValueLabels> _shortValueLabels;
     private readonly List<VariableWrapper> _variables;
+    private readonly List<GenericMiscInformationRecord> _genericMiscInfoRecords = new();
+    
+    public List<VariableWrapper> Variables
+    {
+        get
+        {
+            return _variables;
+        }
+    }
 
     public MetadataWriter(BinaryWriter writer, Metadata metadata)
     {
@@ -37,9 +46,25 @@ public class MetadataWriter
 
     public void Write()
     {
-        _recordTypeWriter.WriteHeaderRecord(_metadata, _variables);
-        _recordTypeWriter.WriteVariableRecords(_variables);
-        _recordTypeWriter.WriteValueLabelRecords(_shortValueLabels);
+        WriteFundamentalRecords();
+        WriteMiscInfoRecords();
+        WriteDicionaryTerminationRecord();
+    }
+
+    public void AddMiscInfoRecord(int subtype, int size, int count, byte[] data)
+    {
+        var rec = new GenericMiscInformationRecord
+        {
+            Subtype = subtype,
+            Size = size,
+            Count = count,
+            Data = data,
+        };
+        _genericMiscInfoRecords.Add(rec);
+    }
+
+    private void WriteMiscInfoRecords()
+    {
         _recordTypeInfoWriter.WriteMachineIntegerInfoRecord();
         _recordTypeInfoWriter.WriteMachineFloatingPointInfoRecord();
         _recordTypeInfoWriter.WriteDisplayValuesInfoRecord(_displayValues);
@@ -48,7 +73,22 @@ public class MetadataWriter
         _recordTypeInfoWriter.WriteCharacterEncodingRecord();
         _recordTypeInfoWriter.WriteValueLabelStringRecords(_variables);
         _recordTypeInfoWriter.WriteMissingStringRecords(_variables);
+        foreach (var rec in _genericMiscInfoRecords)
+        {
+            _recordTypeInfoWriter.WriteGenericInfoRecord(rec.Subtype, rec.Size, rec.Count, rec.Data);
+        }
+    }
+
+    private void WriteDicionaryTerminationRecord()
+    {
         _recordTypeWriter.WriteDictionaryTerminationRecord();
+    }
+
+    private void WriteFundamentalRecords()
+    {
+        _recordTypeWriter.WriteHeaderRecord(_metadata, _variables);
+        _recordTypeWriter.WriteVariableRecords(_variables);
+        _recordTypeWriter.WriteValueLabelRecords(_shortValueLabels);
     }
 
     public void ValidateVariables()
