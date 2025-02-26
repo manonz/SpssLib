@@ -65,6 +65,11 @@ public abstract class Variable
     /// </summary>
     public MeasurementType MeasurementType { get; set; } = MeasurementType.Nominal;
 
+    /// <summary>
+    ///     Is this set as the  weighting variable?
+    /// </summary>
+    public bool IsWeight { get; set; } = false;
+
     public static Variable Create(string name, string? label, FormatType formatType, int spssWidth, int decimalPlaces)
     {
         if (formatType == FormatType.A) return new Variable<string>(name, spssWidth, decimalPlaces) { Label = label };
