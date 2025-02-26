@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,13 @@ public class RecordTypeInfoWriter
         _writer.Write(subtype);
         _writer.Write(itemSize);
         _writer.Write(itemCount);
+    }
+
+    public void WriteGenericInfoRecord(int subtype, int itemSize, int itemCount, byte[] data)
+    {
+        WriteInfoHeader(subtype, itemSize, itemCount);
+        Debug.Assert(data.Length == itemSize * itemCount);
+        _writer.Write(data);
     }
 
     public void WriteValueLabelStringRecords(List<VariableWrapper> records)
