@@ -38,7 +38,7 @@ public class RecordTypeWriter
         _writer.Write(2); // LayoutCode
         _writer.Write(count);
         _writer.Write(1); // compressed
-        _writer.Write(0); // WeightIndex
+        _writer.Write(metadata.WeightIndex);
         _writer.Write(metadata.Cases);
         _writer.Write((double)metadata.Bias);
         _writer.Write(DateTime.Now.ToString("dd MMM yyHH:mm:ss", _invariantCultureDateTimeFormat).ToCharArray());
