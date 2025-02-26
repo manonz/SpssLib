@@ -60,9 +60,10 @@ public class MetadataWriter
 
             if (variable.ValueLength > 32767) variable.ValueLength = 32767;
 
-            if (variable.ValueLabels == null) return;
-
-            foreach (var label in variable.ValueLabels) variable.ValueLabels[label.Key] = TrimMaxLength(label.Value, 120)!;
+            if (variable.ValueLabels != null)
+            {
+                foreach (var label in variable.ValueLabels) variable.ValueLabels[label.Key] = TrimMaxLength(label.Value, 120)!;
+            }
         }
     }
 
