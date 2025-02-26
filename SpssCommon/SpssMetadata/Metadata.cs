@@ -37,6 +37,11 @@ public class Metadata
     public int Cases { get; set; }
 
     /// <summary>
+    ///      Dictionary index of the weighting variable plus 1. If none, 0.
+    /// </summary>
+    public int WeightIndex { get; set; }
+
+    /// <summary>
     ///     The encoding used to read/write the variable
     /// </summary>
     public int HeaderCodePage { get; set; }
