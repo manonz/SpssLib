@@ -21,7 +21,13 @@ public class Metadata
         HeaderCodePage = Encoding.UTF8.CodePage;
         DataCodePage = Encoding.UTF8.CodePage;
         Variables = variables;
+        ProductName = "@(#) IBM SPSS STATISTICS MS Windows 25.0.0.0";
     }
+
+    /// <summary>
+    ///     Product identification string.
+    /// </summary>
+    public string ProductName { get; set; } = string.Empty;
 
     /// <summary>
     ///     A bias used for the compression of numerical values. By default set to 100.
