@@ -54,4 +54,11 @@ public class SpssWriter : IDisposable
         writer.DataWriter.Write();
         ((IDisposable)writer).Dispose();
     }
+
+    public void Write(SpssData spssData, Stream stream)
+    {
+        MetadataWriter.Write();
+        DataWriter.Write();
+        ((IDisposable)writer).Dispose();
+    }
 }
