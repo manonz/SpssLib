@@ -59,6 +59,8 @@ public class SpssWriter : IDisposable
     {
         MetadataWriter.Write();
         DataWriter.Write();
+        DataWriter.Flush();
+        _writer.Flush();
         ((IDisposable)_writer).Dispose();
     }
 }
