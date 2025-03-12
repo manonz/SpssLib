@@ -44,7 +44,7 @@ public class VariableWrapper
 
     internal Dictionary<object, string>? ValueLabels => _variable.ValueLabels;
     internal byte[] ShortName8Bytes { get; set; } = null!;
-    internal string ShortName { get; set; } = null!;
+    public string ShortName { get; internal set; } = null!;
     internal List<byte[]> GhostNames { get; } = new();
     internal int LastGhostVariableLength { get; set; }
 }
