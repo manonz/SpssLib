@@ -4,12 +4,26 @@
 		<Nullable>enable</Nullable>
 		<TargetFrameworks>net8.0</TargetFrameworks>
 		<RootNamespace>Spss</RootNamespace>
-		<PackageProjectUrl>https://github.com/Anderman/Medella.SPSS</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/Anderman/Medella.SPSS</RepositoryUrl>
-		<Description>A cleancode library for writing spss .sav files</Description>
+		<PackageProjectUrl>https://github.com/manonz/SpssLib</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/manonz/SpssLib</RepositoryUrl>
+		<Description>A cleancode library for writing spss .sav files. Medella.SPSS with multiple response additions. See https://github.com/Anderman/Medella.SPSS</Description>
 		<PackageTags>sav; spss; spsslib;</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	</PropertyGroup>
+		<Title>Medella.SPSS writer lib with multiple response additions.</Title>
+		<PackageReadmeFile>ReadMe.md</PackageReadmeFile>
+		<PackageId>manonz.$(AssemblyName)</PackageId>
+		<Product>manonz.$(AssemblyName)</Product>
+      <AssemblyVersion>1.0.2</AssemblyVersion>
+      <FileVersion>$(AssemblyVersion)</FileVersion>
+      <Version>$(AssemblyVersion)</Version>
+   </PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\ReadMe.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\SpssCommon\SpssCommon.csproj" />
